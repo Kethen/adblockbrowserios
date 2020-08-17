@@ -158,7 +158,6 @@ func preloadControllerClasses() {
 
     _ = NSStringFromClass(AdblockingSettingsViewController.self)
     _ = NSStringFromClass(ClearDataViewController.self)
-    _ = NSStringFromClass(CrashReportsViewController.self)
     _ = NSStringFromClass(DevSettingsViewController.self)
     _ = NSStringFromClass(ExceptionsViewController.self)
     _ = NSStringFromClass(TopSettingsViewController.self)

@@ -1,4 +1,3 @@
-github "kitt-browser/HockeySDK-iOS" "feature/metrics-telemetry-filter"
-github "CocoaLumberjack/CocoaLumberjack"
+github "CocoaLumberjack/CocoaLumberjack" "3.5.2"
 github "kitt-browser/AttributedMarkdown" "master"
-github "ReactiveX/RxSwift" ~> 3.4
+github "ReactiveX/RxSwift" "5.0.1"

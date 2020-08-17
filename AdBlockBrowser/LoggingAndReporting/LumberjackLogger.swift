@@ -22,22 +22,22 @@
 import CocoaLumberjackSwift
 import Foundation
 
+typealias Log = LumberjackLogger
+
 /// NSDateFormatter is not threadsafe, using it in multiple loggers is possible but requires an elaborate thread safety instrumentation.
 /// https://github.com/CocoaLumberjack/CocoaLumberjack/blob/master/Documentation/CustomFormatters.md#thread-safety-simple
 /// Therefore each logger must have its own instance of log formatter.
 final class LumberjackLogger: LoggerSink {
     private static var instance: LumberjackLogger?
 
-    static func createInstance(eventFunnel: EventSendingFunnel) {
+    static func createInstance() {
         if instance == nil {
-            instance = LumberjackLogger(eventFunnel: eventFunnel)
+            instance = LumberjackLogger()
         }
     }
 
-    private let eventFunnel: EventSendingFunnel
 
-    private init(eventFunnel: EventSendingFunnel) {
-        self.eventFunnel = eventFunnel
+    private init() {
         defaultDebugLevel = .warning
 
         if let ttyLogger = DDTTYLogger.sharedInstance {
@@ -68,13 +68,11 @@ final class LumberjackLogger: LoggerSink {
 
     static func critical(_ error: StringCodeConvertibleError) {
         DDLogError(error.shortCode)
-        instance?.eventFunnel.register(error: error)
     }
 
     /// - parameter forcedRegisteringCompletion: if set, will send error regardless of
     /// crash reporting status and user (dis)approval
     static func critical(_ error: StringCodeConvertibleError, forcedRegisteringCompletion: @escaping () -> Void) {
         DDLogError(error.shortCode)
-        instance?.eventFunnel.register(error: error, forcedRegisteringCompletion: forcedRegisteringCompletion)
     }
 }

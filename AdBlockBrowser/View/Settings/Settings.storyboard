@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -328,29 +328,8 @@
                                             <segue destination="aA6-Zr-efZ" kind="show" id="vSK-qh-xZv"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="9Yo-Yw-iOJ" style="IBUITableViewCellStyleDefault" id="f35-CM-RTs" customClass="TableViewCell" customModule="AdblockBrowser" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="463.5" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f35-CM-RTs" id="TLW-41-0TX">
-                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Crash and Error Reports" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Yo-Yw-iOJ">
-                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <gestureRecognizers/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.1529411765" green="0.14117647059999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="WzE-yb-oS2" kind="show" id="qY3-UU-10f"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="jYx-x4-AiW" style="IBUITableViewCellStyleDefault" id="Fkq-Gh-n2v" customClass="TableViewCell" customModule="AdblockBrowser" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="507.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="463.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fkq-Gh-n2v" id="5l0-FO-71k">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -383,7 +362,6 @@
                     <connections>
                         <outlet property="adBlockingLabel" destination="4gu-SR-RpY" id="yCM-ji-klm"/>
                         <outlet property="clearDataLabel" destination="Byy-j9-aSh" id="PIx-GE-Fnw"/>
-                        <outlet property="crashAndErrorReportsLabel" destination="9Yo-Yw-iOJ" id="mis-Fp-3Ce"/>
                         <outlet property="searchEngineLabel" destination="mgV-05-2Go" id="eO2-d3-zts"/>
                         <outlet property="searchSuggestionsLabel" destination="q6N-67-zad" id="vH3-ej-LbQ"/>
                         <outlet property="versionLabel" destination="e6E-tr-vcZ" id="hLu-0I-hxU"/>
@@ -794,7 +772,7 @@
             <objects>
                 <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="WzE-yb-oS2" userLabel="Crash and Error Reports" customClass="CrashReportsViewController" customModule="AdblockBrowser" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="n6T-Dc-82t">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.95294117647058818" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>

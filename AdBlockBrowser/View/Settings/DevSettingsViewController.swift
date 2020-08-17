@@ -16,7 +16,6 @@
  */
 
 import Foundation
-import HockeySDK
 
 let defaultsKeyShowMemoryPressure = "ShowMemoryPressure"
 
@@ -67,7 +66,7 @@ final class DevSettingsViewController: SettingsTableViewController<DevSettingsVi
     }
 
     @IBAction func onCrashAppButtonClicked(_ sender: UIButton) {
-        BITHockeyManager.shared().crashManager.generateTestCrash()
+        // BITHockeyManager.shared().crashManager.generateTestCrash()
     }
 
     @IBAction func onProduceErrorButtonClicked(sender: UIButton) {

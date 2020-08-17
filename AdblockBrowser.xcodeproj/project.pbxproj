@@ -22,10 +22,6 @@
 		69077E801F41CAC200A76029 /* BookmarksBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69077E7F1F41CAC200A76029 /* BookmarksBaseViewModel.swift */; };
 		69095C1E1F55ABFF00FD4DF9 /* CrashReportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69095C1D1F55ABFF00FD4DF9 /* CrashReportsViewModel.swift */; };
 		69095C201F55B68700FD4DF9 /* DevSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69095C1F1F55B68700FD4DF9 /* DevSettingsViewModel.swift */; };
-		6913B11C1F614D3B001A5EA5 /* HockeyCrashDefaultsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6913B1181F614D3A001A5EA5 /* HockeyCrashDefaultsHandler.swift */; };
-		6913B11D1F614D3B001A5EA5 /* HockeyEventDefaultsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6913B1191F614D3B001A5EA5 /* HockeyEventDefaultsHandler.swift */; };
-		6913B11F1F614D3B001A5EA5 /* HockeyEventSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6913B11B1F614D3B001A5EA5 /* HockeyEventSender.swift */; };
-		6913B1221F614D92001A5EA5 /* EventHandlingEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C98241F3CA1410069C64A /* EventHandlingEnums.swift */; };
 		691673481ABC80EC00297642 /* adblockplus.crx in Resources */ = {isa = PBXBuildFile; fileRef = 691673471ABC80EC00297642 /* adblockplus.crx */; };
 		6919BC301E7FF6EA004B866A /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6919BC2E1E7FF6EA004B866A /* DashboardViewController.swift */; };
 		6919BC311E7FF6EA004B866A /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6919BC2F1E7FF6EA004B866A /* HistoryViewController.swift */; };
@@ -60,7 +56,6 @@
 		694C981B1F3C9C600069C64A /* AutocompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C981A1F3C9C600069C64A /* AutocompleteViewModel.swift */; };
 		694C981E1F3C9D110069C64A /* AutocompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C981C1F3C9D110069C64A /* AutocompleteViewController.swift */; };
 		694C981F1F3C9D110069C64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 694C981D1F3C9D110069C64A /* Main.storyboard */; };
-		694C98291F3CA1410069C64A /* DebugReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C98221F3CA1410069C64A /* DebugReporting.swift */; };
 		694C982D1F3CA1410069C64A /* LumberjackFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C98261F3CA1410069C64A /* LumberjackFormatter.swift */; };
 		694C982E1F3CA1410069C64A /* LumberjackLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C98271F3CA1410069C64A /* LumberjackLogger.swift */; };
 		695C0BBA1E72ADC5005E9002 /* BrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695C0BB91E72ADC5005E9002 /* BrowserViewModel.swift */; };
@@ -111,7 +106,6 @@
 		6983A2F11F3C7C35006D6786 /* MemoryWatchdog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983A2F01F3C7C35006D6786 /* MemoryWatchdog.swift */; };
 		6983C3AF1EC347D2002822D0 /* UndoToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983C3AE1EC347D2002822D0 /* UndoToast.swift */; };
 		6983E04E1F2F6A0D0046FB1C /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983E04D1F2F6A0D0046FB1C /* TableViewCell.swift */; };
-		699248751F67CFD3006110DD /* EventSendingFunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699248741F67CFD3006110DD /* EventSendingFunnel.swift */; };
 		699CDB491E76CA6900ABA67F /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CDB481E76CA6900ABA67F /* MenuViewController.swift */; };
 		699CDB4D1E76CA8600ABA67F /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CDB4C1E76CA8600ABA67F /* MenuViewModel.swift */; };
 		69A343691E71827C00248DF3 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A343681E71827C00248DF3 /* RxSwift.framework */; };
@@ -124,7 +118,6 @@
 		69AF5EA71EF8990700ADC665 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AF5EA61EF8990700ADC665 /* BookmarkCell.swift */; };
 		69BDC2B31B568C38001B3790 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BDC2B21B568C38001B3790 /* UIImage+animatedGIF.m */; };
 		69CC8EAD1F1E300700087D1F /* CustomViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CC8EAC1F1E300700087D1F /* CustomViewsTests.swift */; };
-		69D1E8AC1F55AA7D00979568 /* CrashReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D1E8AB1F55AA7D00979568 /* CrashReportsViewController.swift */; };
 		69D1E8B01F55AB3E00979568 /* DevSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D1E8AF1F55AB3E00979568 /* DevSettingsViewController.swift */; };
 		69D72E491ECB4ADE005E9983 /* CellIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D72E481ECB4ADE005E9983 /* CellIdentifier.swift */; };
 		69D72E731ECDA173005E9983 /* BrowserContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D72E721ECDA173005E9983 /* BrowserContainerViewController.swift */; };
@@ -137,6 +130,7 @@
 		69F0B71D1F0136EF00A82ED2 /* FetchedResultsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F0B71C1F0136EF00A82ED2 /* FetchedResultsAdapter.swift */; };
 		69F0B7231F02565F00A82ED2 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F0B7221F02565F00A82ED2 /* HistoryCell.swift */; };
 		69F741601B61122200C28189 /* AdblockPlusFacadeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F7415F1B61122200C28189 /* AdblockPlusFacadeTests.swift */; };
+		8975405E24E6F6C50029A40D /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8975405D24E6F6C50029A40D /* RxRelay.framework */; };
 		E90062D61D915E6300EADE9F /* NilContractTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E90062D51D915E6300EADE9F /* NilContractTest.m */; };
 		E90062DA1D915EBB00EADE9F /* NilContractTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90062D91D915EBB00EADE9F /* NilContractTestSupport.swift */; };
 		E90062DB1D91619D00EADE9F /* NilContractTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90062D91D915EBB00EADE9F /* NilContractTestSupport.swift */; };
@@ -249,9 +243,6 @@
 		69077E7F1F41CAC200A76029 /* BookmarksBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksBaseViewModel.swift; sourceTree = "<group>"; };
 		69095C1D1F55ABFF00FD4DF9 /* CrashReportsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashReportsViewModel.swift; sourceTree = "<group>"; };
 		69095C1F1F55B68700FD4DF9 /* DevSettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevSettingsViewModel.swift; sourceTree = "<group>"; };
-		6913B1181F614D3A001A5EA5 /* HockeyCrashDefaultsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HockeyCrashDefaultsHandler.swift; sourceTree = "<group>"; };
-		6913B1191F614D3B001A5EA5 /* HockeyEventDefaultsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HockeyEventDefaultsHandler.swift; sourceTree = "<group>"; };
-		6913B11B1F614D3B001A5EA5 /* HockeyEventSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HockeyEventSender.swift; sourceTree = "<group>"; };
 		691673471ABC80EC00297642 /* adblockplus.crx */ = {isa = PBXFileReference; lastKnownFileType = file; path = adblockplus.crx; sourceTree = "<group>"; };
 		6919BC2E1E7FF6EA004B866A /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		6919BC2F1E7FF6EA004B866A /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -286,8 +277,6 @@
 		694C981A1F3C9C600069C64A /* AutocompleteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteViewModel.swift; sourceTree = "<group>"; };
 		694C981C1F3C9D110069C64A /* AutocompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteViewController.swift; sourceTree = "<group>"; };
 		694C981D1F3C9D110069C64A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		694C98221F3CA1410069C64A /* DebugReporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugReporting.swift; sourceTree = "<group>"; };
-		694C98241F3CA1410069C64A /* EventHandlingEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHandlingEnums.swift; sourceTree = "<group>"; };
 		694C98261F3CA1410069C64A /* LumberjackFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LumberjackFormatter.swift; sourceTree = "<group>"; };
 		694C98271F3CA1410069C64A /* LumberjackLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LumberjackLogger.swift; sourceTree = "<group>"; };
 		695C0BB91E72ADC5005E9002 /* BrowserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewModel.swift; sourceTree = "<group>"; };
@@ -339,7 +328,6 @@
 		6983A2F01F3C7C35006D6786 /* MemoryWatchdog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWatchdog.swift; sourceTree = "<group>"; };
 		6983C3AE1EC347D2002822D0 /* UndoToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoToast.swift; sourceTree = "<group>"; };
 		6983E04D1F2F6A0D0046FB1C /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		699248741F67CFD3006110DD /* EventSendingFunnel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSendingFunnel.swift; sourceTree = "<group>"; };
 		699CDB481E76CA6900ABA67F /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		699CDB4C1E76CA8600ABA67F /* MenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		69A343681E71827C00248DF3 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = SOURCE_ROOT; };
@@ -357,7 +345,6 @@
 		69C7B80A1E93031B00544B95 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		69C7B80B1E93031B00544B95 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		69CC8EAC1F1E300700087D1F /* CustomViewsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewsTests.swift; sourceTree = "<group>"; };
-		69D1E8AB1F55AA7D00979568 /* CrashReportsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashReportsViewController.swift; sourceTree = "<group>"; };
 		69D1E8AF1F55AB3E00979568 /* DevSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevSettingsViewController.swift; sourceTree = "<group>"; };
 		69D72E481ECB4ADE005E9983 /* CellIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellIdentifier.swift; path = Protocols/CellIdentifier.swift; sourceTree = "<group>"; };
 		69D72E721ECDA173005E9983 /* BrowserContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserContainerViewController.swift; sourceTree = "<group>"; };
@@ -371,6 +358,8 @@
 		69F0B71C1F0136EF00A82ED2 /* FetchedResultsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsAdapter.swift; sourceTree = "<group>"; };
 		69F0B7221F02565F00A82ED2 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		69F7415F1B61122200C28189 /* AdblockPlusFacadeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdblockPlusFacadeTests.swift; sourceTree = "<group>"; };
+		8975405D24E6F6C50029A40D /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = SOURCE_ROOT; };
+		89762CFB24E7048C00401A9B /* Entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = Entitlements.plist; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/Entitlements.plist; sourceTree = DEVELOPER_DIR; };
 		BBC60AAA1E76CF0800484739 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BBC60AAD1E76CF0800484739 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BBC60AAE1E76CF0900484739 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -528,7 +517,6 @@
 		E91C93F11B4BCECF00F3006F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E91C93F31B4BCED400F3006F /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E925756A1DEEDBF000B93166 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = SOURCE_ROOT; };
-		E925756B1DEEDBF000B93166 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Carthage/Build/iOS/HockeySDK.framework; sourceTree = SOURCE_ROOT; };
 		E92575821DEF1B6B00B93166 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = SOURCE_ROOT; };
 		E92D1E731E26D0690077973A /* AttributedMarkdown.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AttributedMarkdown.framework; path = Carthage/Build/iOS/AttributedMarkdown.framework; sourceTree = SOURCE_ROOT; };
 		E93DD54F1CA14A1C000DB967 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -614,6 +602,7 @@
 				E925756D1DEEDBF000B93166 /* CocoaLumberjackSwift.framework in Frameworks */,
 				69A3436B1E71828D00248DF3 /* RxCocoa.framework in Frameworks */,
 				69A343691E71827C00248DF3 /* RxSwift.framework in Frameworks */,
+				8975405E24E6F6C50029A40D /* RxRelay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,7 +672,6 @@
 				294342B12195A82B0099D5C8 /* AboutViewController.swift */,
 				694493621F30897C00294EE7 /* AdblockingSettingsViewController.swift */,
 				694493601F3087AB00294EE7 /* ClearDataViewController.swift */,
-				69D1E8AB1F55AA7D00979568 /* CrashReportsViewController.swift */,
 				69D1E8AF1F55AB3E00979568 /* DevSettingsViewController.swift */,
 				694493631F30897C00294EE7 /* ExceptionsViewController.swift */,
 				694493701F308B8100294EE7 /* SearchEnginesViewController.swift */,
@@ -714,12 +702,6 @@
 		694C98201F3CA1410069C64A /* LoggingAndReporting */ = {
 			isa = PBXGroup;
 			children = (
-				694C98221F3CA1410069C64A /* DebugReporting.swift */,
-				694C98241F3CA1410069C64A /* EventHandlingEnums.swift */,
-				699248741F67CFD3006110DD /* EventSendingFunnel.swift */,
-				6913B1181F614D3A001A5EA5 /* HockeyCrashDefaultsHandler.swift */,
-				6913B1191F614D3B001A5EA5 /* HockeyEventDefaultsHandler.swift */,
-				6913B11B1F614D3B001A5EA5 /* HockeyEventSender.swift */,
 				694C98261F3CA1410069C64A /* LumberjackFormatter.swift */,
 				694C98271F3CA1410069C64A /* LumberjackLogger.swift */,
 			);
@@ -880,6 +862,7 @@
 		E91C79631AB2E22700632D61 = {
 			isa = PBXGroup;
 			children = (
+				89762CFB24E7048C00401A9B /* Entitlements.plist */,
 				E91C796E1AB2E22700632D61 /* AdblockBrowser */,
 				E91C79841AB2E22700632D61 /* AdblockBrowserTests */,
 				E91C79961AB2E77700632D61 /* ExtensionShare */,
@@ -1000,13 +983,13 @@
 		E968E3951AB323B90002735B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8975405D24E6F6C50029A40D /* RxRelay.framework */,
 				E92D1E731E26D0690077973A /* AttributedMarkdown.framework */,
 				E968E37A1AB2EC7C0002735B /* AVFoundation.framework */,
 				E92575821DEF1B6B00B93166 /* CocoaLumberjack.framework */,
 				E925756A1DEEDBF000B93166 /* CocoaLumberjackSwift.framework */,
 				E9CD44B71B26F062005662E0 /* CoreData.framework */,
 				E9BC27701ACA934F00CB5268 /* CoreLocation.framework */,
-				E925756B1DEEDBF000B93166 /* HockeySDK.framework */,
 				E968E3761AB2EC640002735B /* JavaScriptCore.framework */,
 				E968E37C1AB2EC850002735B /* MessageUI.framework */,
 				69A3436A1E71828D00248DF3 /* RxCocoa.framework */,
@@ -1091,20 +1074,19 @@
 				TargetAttributes = {
 					E91C796B1AB2E22700632D61 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = GRYYZR985A;
+						DevelopmentTeam = C67CF9S4VU;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
 					};
 					E91C79801AB2E22700632D61 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = G5LEUTX2F6;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
 						TestTargetID = E91C796B1AB2E22700632D61;
 					};
 					E91C79941AB2E77700632D61 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = GRYYZR985A;
+						DevelopmentTeam = C67CF9S4VU;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 					};
@@ -1115,12 +1097,56 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				cs,
 				de,
 				ar,
 				zh_Hans,
 				hu,
+				bg,
+				bn,
+				el,
+				fr,
+				hr,
+				id,
+				it,
+				nb,
+				nl,
+				pl,
+				ro,
+				sk,
+				th,
+				tr,
+				uk,
+				ru,
+				sl,
+				lv,
+				es,
+				ca,
+				"es-MX",
+				he,
+				hi,
+				ja,
+				sr,
+				"zh-Hant",
+				pt,
+				"pt-PT",
+				da,
+				et,
+				fa,
+				fi,
+				fil,
+				gu,
+				ko,
+				lt,
+				ml,
+				ms,
+				sv,
+				sw,
+				ta,
+				te,
+				vi,
 			);
 			mainGroup = E91C79631AB2E22700632D61;
 			productRefGroup = E91C796D1AB2E22700632D61 /* Products */;
@@ -1223,7 +1249,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SWIFTLINT=\"/usr/local/bin/swiftlint\"\nif [ -f $SWIFTLINT ]\nthen\n    $SWIFTLINT\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "SWIFTLINT=\"/usr/local/bin/swiftlint\"\nif [ -f $SWIFTLINT ]\nthen\n    $SWIFTLINT\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		29D3BB912077B22F004305AD /* Manage API Data */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1250,14 +1276,14 @@
 				"$(SRCROOT)/Carthage/Build/iOS/AttributedMarkdown.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/HockeySDK.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework",
 			);
 			name = "Carthage copy frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n\t\t\t\n";
 			showEnvVarsInLog = 0;
 		};
 		E92575A11DF0418300B93166 /* Carthage copy frameworks */ = {
@@ -1288,17 +1314,14 @@
 				6983A2EC1F3C7BE5006D6786 /* AvailableSubscription.swift in Sources */,
 				691E5D3C1EAE32CE00F5C0FE /* CenteredButton.swift in Sources */,
 				6983A2E51F3C7B9F006D6786 /* BootstrapController.swift in Sources */,
-				6913B11C1F614D3B001A5EA5 /* HockeyCrashDefaultsHandler.swift in Sources */,
 				6983A2E71F3C7B9F006D6786 /* BrowserAssembly.swift in Sources */,
 				694493611F3087AB00294EE7 /* ClearDataViewController.swift in Sources */,
 				694C982D1F3CA1410069C64A /* LumberjackFormatter.swift in Sources */,
 				69AF5EA31EF893AD00ADC665 /* EditBookmarkViewController.swift in Sources */,
-				699248751F67CFD3006110DD /* EventSendingFunnel.swift in Sources */,
 				692242271F2A0AFC00AFD1E2 /* ExceptionsViewModel.swift in Sources */,
 				29BD987621CD024600E067F9 /* AboutViewModel.swift in Sources */,
 				699CDB4D1E76CA8600ABA67F /* MenuViewModel.swift in Sources */,
 				6932E3EB1EEEF0CF009F31BF /* GhostModeBanner.swift in Sources */,
-				6913B11F1F614D3B001A5EA5 /* HockeyEventSender.swift in Sources */,
 				69DF79051EAA460D00B86F18 /* TipCell.swift in Sources */,
 				6983A2B11F3C76EE006D6786 /* AutocompleteTextField.swift in Sources */,
 				6919BC361E7FF77F004B866A /* ViewControllerHelpers.swift in Sources */,
@@ -1321,7 +1344,6 @@
 				6983A2A41F3C766C006D6786 /* LongestCommonSubsequence.swift in Sources */,
 				6983A2E81F3C7B9F006D6786 /* FailureController.swift in Sources */,
 				6983A2D31F3C7A1F006D6786 /* MacroSettingsExpander.m in Sources */,
-				6913B11D1F614D3B001A5EA5 /* HockeyEventDefaultsHandler.swift in Sources */,
 				6983A2BB1F3C7797006D6786 /* MenuCell.swift in Sources */,
 				6983A2B71F3C76EE006D6786 /* TableViewHeaderFooterView.swift in Sources */,
 				6944936D1F308A5C00294EE7 /* SubscriptionsViewController.swift in Sources */,
@@ -1349,7 +1371,6 @@
 				6983A2E21F3C7B9F006D6786 /* ABPExtensionFacade.swift in Sources */,
 				69DF78E41EA8DFF600B86F18 /* TabsViewController.swift in Sources */,
 				69AF5EA71EF8990700ADC665 /* BookmarkCell.swift in Sources */,
-				694C98291F3CA1410069C64A /* DebugReporting.swift in Sources */,
 				69D72E771ECDA1E8005E9983 /* BrowserContainerViewModel.swift in Sources */,
 				6983A2C41F3C790D006D6786 /* SAContentWebView+AdblockPlus.swift in Sources */,
 				6983A2F11F3C7C35006D6786 /* MemoryWatchdog.swift in Sources */,
@@ -1371,14 +1392,12 @@
 				6983A2ED1F3C7BE5006D6786 /* ListedSubscription.swift in Sources */,
 				6983A2A71F3C766C006D6786 /* Utils.swift in Sources */,
 				69DF79011EAA369900B86F18 /* AddNewTabCell.swift in Sources */,
-				6913B1221F614D92001A5EA5 /* EventHandlingEnums.swift in Sources */,
 				694493691F3089AC00294EE7 /* ClearDataViewModel.swift in Sources */,
 				6919BC3A1E7FFAE0004B866A /* DashboardViewModel.swift in Sources */,
 				69AF5E9F1EF87F5A00ADC665 /* BookmarksViewController.swift in Sources */,
 				694493741F308C0400294EE7 /* SearchEnginesViewModel.swift in Sources */,
 				69077E801F41CAC200A76029 /* BookmarksBaseViewModel.swift in Sources */,
 				694493651F30897C00294EE7 /* AdblockingSettingsViewController.swift in Sources */,
-				69D1E8AC1F55AA7D00979568 /* CrashReportsViewController.swift in Sources */,
 				69F0B7231F02565F00A82ED2 /* HistoryCell.swift in Sources */,
 				6983A2C31F3C790D006D6786 /* NSObject+MethodSwizzling.swift in Sources */,
 				6983A2A51F3C766C006D6786 /* TwoStatesConstraint.swift in Sources */,
@@ -1792,8 +1811,11 @@
 			baseConfigurationReference = E9D6613A1E5C92DE0040B0BC /* AdblockBrowserDebug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = GRYYZR985A;
+				CODE_SIGN_ENTITLEMENTS = "/Applications/Xcode 10.3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = C67CF9S4VU;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
@@ -1804,9 +1826,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.adblockplus.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.katie.AdblockBrowser;
 				PRODUCT_NAME = AdblockBrowser;
-				PROVISIONING_PROFILE_SPECIFIER = "Dev Adblock Browser";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore ph.telegra.Telegraph";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1817,6 +1839,11 @@
 			baseConfigurationReference = E9D661341E5C8F440040B0BC /* AdblockBrowserRelease.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_ENTITLEMENTS = "/Applications/Xcode 10.3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = C67CF9S4VU;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
@@ -1827,8 +1854,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) $(SWIFT_ADDITIONAL_FLAGS)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.adblockplus.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.katie.AdblockBrowser;
 				PRODUCT_NAME = AdblockBrowser;
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore ph.telegra.Telegraph";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1840,6 +1868,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = "/Applications/Xcode 10.3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1852,7 +1885,8 @@
 				INFOPLIST_FILE = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AdblockBrowserTests;
-				SWIFT_VERSION = 4.2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdblockBrowser.app/AdblockBrowser";
 			};
 			name = Debug;
@@ -1863,6 +1897,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = "/Applications/Xcode 10.3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1871,7 +1910,8 @@
 				INFOPLIST_FILE = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AdblockBrowserTests;
-				SWIFT_VERSION = 4.2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdblockBrowser.app/AdblockBrowser";
 			};
 			name = Release;
@@ -1880,14 +1920,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E9D6613B1E5C93010040B0BC /* ExtensionShareDebug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = GRYYZR985A;
+				CODE_SIGN_ENTITLEMENTS = "/Applications/Xcode 10.3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = C67CF9S4VU;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = ExtensionShare/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.adblockplus.AdblockBrowser.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.katie.AdblockBrowser.ExtensionShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Dev Adblock Browser Share Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore ph.telegra.Telegraph";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -1899,10 +1942,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E9D661381E5C8F9D0040B0BC /* ExtensionShareRelease.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "/Applications/Xcode 10.3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = C67CF9S4VU;
 				INFOPLIST_FILE = ExtensionShare/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.adblockplus.AdblockBrowser.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.katie.AdblockBrowser.ExtensionShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore ph.telegra.Telegraph";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -1976,6 +2025,11 @@
 			baseConfigurationReference = E9D661371E5C8F790040B0BC /* AdblockBrowserDevbuild.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_ENTITLEMENTS = "/Applications/Xcode 10.3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = C67CF9S4VU;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
@@ -1986,8 +2040,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.adblockplus.devbuilds.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.katie.AdblockBrowser;
 				PRODUCT_NAME = AdblockBrowser;
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore ph.telegra.Telegraph";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1999,6 +2054,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = "/Applications/Xcode 10.3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2007,7 +2067,8 @@
 				INFOPLIST_FILE = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AdblockBrowserTests;
-				SWIFT_VERSION = 4.2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdblockBrowser.app/AdblockBrowser";
 			};
 			name = Devbuild;
@@ -2016,10 +2077,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E9D661391E5C8FBE0040B0BC /* ExtensionShareDevbuild.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "/Applications/Xcode 10.3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Digital Fortress LLC (C67CF9S4VU)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = C67CF9S4VU;
 				INFOPLIST_FILE = ExtensionShare/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.adblockplus.devbuilds.AdblockBrowser.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.katie.AdblockBrowser.ExtensionShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore ph.telegra.Telegraph";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
