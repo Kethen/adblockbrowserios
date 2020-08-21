@@ -173,7 +173,7 @@ final class ExceptionsViewController: SettingsTableViewController<ExceptionsView
             return
         }
 
-        viewModel?.isAcceptableAdsEnabled.value = isAcceptableAdsEnabled
+        viewModel?.isAcceptableAdsEnabled.accept(isAcceptableAdsEnabled)
         viewModel?.extensionFacade.setAcceptableAdsEnabled(isAcceptableAdsEnabled)
         tableView.reloadSections(IndexSet(integer: section.rawValue), with: .none)
     }

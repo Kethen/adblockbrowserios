@@ -126,12 +126,12 @@ final class DashboardViewController: CollectionViewController<DashboardViewModel
     }
 
     func didBeginDraggingItem(at indexPath: IndexPath) {
-        viewModel?.isReordering.value = true
+        viewModel?.isReordering.accept(true)
         startingIndexPath = indexPath
     }
 
     func didEndDraggingItem(at indexPath: IndexPath) {
-        viewModel?.isReordering.value = false
+        viewModel?.isReordering.accept(false)
         if indexPath == startingIndexPath, let cell = collectionView?.cellForItem(at: indexPath) {
             // Cell have to be first responder in order to display menu
             cell.becomeFirstResponder()

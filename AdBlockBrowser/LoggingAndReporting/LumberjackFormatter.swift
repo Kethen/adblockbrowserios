@@ -34,7 +34,7 @@ public class LumberjackFormatter: NSObject, DDLogFormatter {
             LumberjackFormatter.stringFromFlag(flag: logMessage.flag),
             dateFormatter.string(from: logMessage.timestamp),
             logMessage.threadID,
-            logMessage.threadName,
+            logMessage.threadName ?? "null thread name",
             logMessage.message])
     }
 

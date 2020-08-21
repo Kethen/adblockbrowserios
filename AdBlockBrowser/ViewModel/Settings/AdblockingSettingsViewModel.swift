@@ -17,11 +17,12 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 final class AdblockingSettingsViewModel: ViewModelProtocol, ComponentsInitializable {
     let components: ControllerComponents
     let extensionFacade: ABPExtensionFacadeProtocol
-    let isAcceptableAdsEnabled = Variable(true)
+    let isAcceptableAdsEnabled = BehaviorRelay<Bool>(value:true)
 
     var extensionEnabled: Bool {
         get { return extensionFacade.extensionEnabled }
@@ -41,7 +42,7 @@ final class AdblockingSettingsViewModel: ViewModelProtocol, ComponentsInitializa
         self.extensionFacade = components.extensionFacade
 
         extensionFacade.isAcceptableAdsEnabled { [weak self] isEnabled, _ in
-            self?.isAcceptableAdsEnabled.value = isEnabled
+            self?.isAcceptableAdsEnabled.accept(isEnabled)
         }
     }
 

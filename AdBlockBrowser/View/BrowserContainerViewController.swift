@@ -106,7 +106,7 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
             bottomBar.rx.controlEvent(.touchUpInside)
                 .map { return .bottomBar }
                 .bind(to: viewModel.events)
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
         }
 
         if let backButton = backButton {
@@ -115,12 +115,12 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
             let isEnabled = Observable.combineLatest(obs1, obs2, isAnyPopupShown) { $0 && $1 && !$2 }
                 .distinctUntilChanged()
 
-            isEnabled.bind(to: backButton.rx.isEnabled).addDisposableTo(disposeBag)
+            isEnabled.bind(to: backButton.rx.isEnabled).disposed(by:disposeBag)
 
             backButton.rx.controlEvent(.touchUpInside)
                 .map { .goBack }
                 .bind(to: viewModel.signalSubject)
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
 
             Observable.combineLatest(isEnabled, isGhostModeEnabled, Observable.just(false)) { return ($0, $1, $2) }
                 .subscribe(onNext: createImageSetter(for: backButton,
@@ -128,7 +128,7 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
                                                      #imageLiteral(resourceName: "ArrowLeftDisabled"),
                                                      #imageLiteral(resourceName: "ArrowLeftGhost"),
                                                      #imageLiteral(resourceName: "ArrowLeftDisabledGhost")))
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
         }
 
         if let forwardButton = forwardButton {
@@ -137,12 +137,12 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
             let isEnabled = Observable.combineLatest(obs1, obs2, isAnyPopupShown) { $0 && $1 && !$2}
                 .distinctUntilChanged()
 
-            isEnabled.bind(to: forwardButton.rx.isEnabled).addDisposableTo(disposeBag)
+            isEnabled.bind(to: forwardButton.rx.isEnabled).disposed(by:disposeBag)
 
             forwardButton.rx.controlEvent(.touchUpInside)
                 .map { .goForward }
                 .bind(to: viewModel.signalSubject)
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
 
             Observable.combineLatest(isEnabled, isGhostModeEnabled, Observable.just(false)) { return ($0, $1, $2) }
                 .subscribe(onNext: createImageSetter(for: forwardButton,
@@ -150,23 +150,23 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
                                                      #imageLiteral(resourceName: "ArrowRightDisabled"),
                                                      #imageLiteral(resourceName: "ArrowRightGhost"),
                                                      #imageLiteral(resourceName: "ArrowRightDisabledGhost")))
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
         }
 
         if let tabsButton = tabsButton {
             viewModel.tabsCount.asObservable()
                 .map { count in "\(count)" }
                 .bind(to: tabsButton.rx.title())
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
 
             tabsButton.rx.controlEvent(.touchUpInside)
                 .map { return .tabsButton }
                 .bind(to: viewModel.events)
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
 
             viewModel.isTabsButttonEnabled
                 .bind(to: tabsButton.rx.isEnabled)
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
 
             Observable
                 .combineLatest(viewModel.isTabsButttonVisuallyEnabled, isGhostModeEnabled, isTabsViewShown) {
@@ -194,13 +194,13 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
                         tabsButton.setTitleColor(color, for: .normal)
                     })
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
         }
 
         if let ghostTabsButton = ghostTabsButton {
             let isEnabled = isAnyPopupShown.map { !$0 } .distinctUntilChanged()
 
-            isEnabled.bind(to: ghostTabsButton.rx.isEnabled).addDisposableTo(disposeBag)
+            isEnabled.bind(to: ghostTabsButton.rx.isEnabled).disposed(by:disposeBag)
 
             ghostTabsButton.rx.controlEvent(.touchUpInside)
                 .withLatestFrom(isGhostModeEnabled)
@@ -215,7 +215,7 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
                         self?.viewModel?.switchToGhostMode()
                     }
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
 
             Observable.combineLatest(isEnabled, isGhostModeEnabled) { return ($0, $1, $1) }
                 .subscribe(onNext: createImageSetter(for: ghostTabsButton,
@@ -224,18 +224,18 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
                                                      #imageLiteral(resourceName: "GhostIcon"),
                                                      #imageLiteral(resourceName: "GhostIconDisabledGhost"),
                                                      #imageLiteral(resourceName: "GhostIconActive")))
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
         }
 
         if let favoriteButton = favoriteButton {
             favoriteButton.rx.controlEvent(.touchUpInside)
                 .map { return .favoriteButton }
                 .bind(to: viewModel.events)
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
 
             viewModel.isFavoriteButtonEnabled
                 .bind(to: favoriteButton.rx.isEnabled)
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
 
             Observable
                 .combineLatest(viewModel.isFavoriteButtonVisuallyEnabled, isGhostModeEnabled, isBookmarksViewShown) {
@@ -247,7 +247,7 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
                                                      #imageLiteral(resourceName: "FavoritesIconGhost"),
                                                      #imageLiteral(resourceName: "FavoritesIconDisabledGhost"),
                                                      #imageLiteral(resourceName: "FavoritesIconActive")))
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
         }
 
         viewModel.isGhostModeEnabled.asObservable()
@@ -259,7 +259,7 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
                     self?.homeBarX?.backgroundColor = isEnabled ? .abbGhostMode : .white
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.searchPhrase.asObservable()
             .subscribe(onNext: { [weak self] searchPhrase in
@@ -280,13 +280,13 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
                     self?.findInPageControl?.clearMatches()
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.toolbarProgress.asObservable()
             .subscribe(onNext: { [weak self] progress in
                 self?.bottomConstraint?.constant = -44 * progress
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         #if DEVBUILD_FEATURES
         /*
@@ -328,7 +328,7 @@ final class BrowserContainerViewController: ViewController<BrowserContainerViewM
     // MARK: - FindInPageControlDelegate
 
     func willFinishFindInPageMode(_ control: FindInPageControl) {
-        viewModel?.searchPhrase.value = nil
+        viewModel?.searchPhrase.accept(nil)
     }
 
     // MARK: - Private

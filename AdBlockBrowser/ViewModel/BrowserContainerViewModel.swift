@@ -17,6 +17,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 enum BrowserControlSignals {
     case dismissModal
@@ -43,7 +44,7 @@ final class BrowserContainerViewModel: ViewModelProtocol, ComponentsInitializabl
     let components: ControllerComponents
     let tabsModel: TabsModel
     let ghostTabsModel: TabsModel
-    let currentTabsModel: Variable<TabsModel>
+    let currentTabsModel: BehaviorRelay<TabsModel>
     let signalSubject = PublishSubject<BrowserControlSignals>()
 
     let canGoBack: Observable<Bool>
@@ -55,14 +56,14 @@ final class BrowserContainerViewModel: ViewModelProtocol, ComponentsInitializabl
     let isTabsButttonVisuallyEnabled: Observable<Bool>
     let isFavoriteButtonVisuallyEnabled: Observable<Bool>
 
-    let isGhostModeEnabled = Variable(false)
-    let isBrowserNavigationEnabled = Variable(false)
-    let isTabsViewShown = Variable(false)
-    let isBookmarksViewShown = Variable(false)
-    let isHistoryViewShown = Variable(false)
+    let isGhostModeEnabled = BehaviorRelay(value: false)
+    let isBrowserNavigationEnabled = BehaviorRelay(value: false)
+    let isTabsViewShown = BehaviorRelay(value: false)
+    let isBookmarksViewShown = BehaviorRelay(value: false)
+    let isHistoryViewShown = BehaviorRelay(value: false)
 
-    let searchPhrase = Variable(String?.none)
-    let toolbarProgress = Variable(CGFloat(0))
+    let searchPhrase = BehaviorRelay(value: String?.none)
+    let toolbarProgress = BehaviorRelay(value: CGFloat(0))
     let actions = PublishSubject<Observable<BrowserContainerActions>>()
     let events = PublishSubject<BrowserContainerTouchEvents>()
 
@@ -75,7 +76,7 @@ final class BrowserContainerViewModel: ViewModelProtocol, ComponentsInitializabl
         self.components = components
         self.tabsModel = TabsModel(window: components.chrome.mainWindow)
         self.ghostTabsModel = TabsModel(window: components.chrome.incognitoWindow ?? components.chrome.mainWindow)
-        self.currentTabsModel = Variable(self.tabsModel)
+        self.currentTabsModel = BehaviorRelay(value: self.tabsModel)
 
         let activeTab = components.chrome.rx
             .observe(ChromeTab.self, #keyPath(Chrome.focusedWindow.activeTab))
@@ -109,7 +110,7 @@ final class BrowserContainerViewModel: ViewModelProtocol, ComponentsInitializabl
             .map { $0?.incognito ?? false }
             .distinctUntilChanged()
             .bind(to: isGhostModeEnabled)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         isGhostModeEnabled.asObservable()
             .map { [ghostTabsModel, tabsModel] isGhostModeEnabled in
@@ -120,7 +121,7 @@ final class BrowserContainerViewModel: ViewModelProtocol, ComponentsInitializabl
                 }
             }
             .bind(to: currentTabsModel)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         self.tabsCount = currentTabsModel.asObservable()
             .flatMapLatest { tabs -> Observable<Int> in
@@ -154,7 +155,7 @@ final class BrowserContainerViewModel: ViewModelProtocol, ComponentsInitializabl
             .filter { $0 == .bottomBar }
             .map { _ in return .just(.hideAllPopups) }
             .bind(to: actions)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         events.asObserver()
             .filter { $0 == .tabsButton }
@@ -173,7 +174,7 @@ final class BrowserContainerViewModel: ViewModelProtocol, ComponentsInitializabl
                 }
             }
             .bind(to: actions)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         events.asObserver()
             .filter { $0 == .favoriteButton }
@@ -192,13 +193,13 @@ final class BrowserContainerViewModel: ViewModelProtocol, ComponentsInitializabl
                 }
             }
             .bind(to: actions)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         isHistoryViewShown.asObservable()
             .filter { $0 }
             .map { _ in return .just(.hideAllPopups) }
             .bind(to: actions)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         self.actions.asObservable()
             .flatMapLatest { actions in
@@ -209,18 +210,18 @@ final class BrowserContainerViewModel: ViewModelProtocol, ComponentsInitializabl
                 case .none:
                     return
                 case .hideAllPopups:
-                    self?.isTabsViewShown.value = false
+                    self?.isTabsViewShown.accept(true)
                     self?.signalSubject.onNext(.dismissModal)
                     return
                 case .showBookmarksView:
                     self?.signalSubject.onNext(.presentBookmarks)
                     return
                 case .showTabsView:
-                    self?.isTabsViewShown.value = true
+                    self?.isTabsViewShown.accept(true)
                     return
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
     }
 
     // MARK: -

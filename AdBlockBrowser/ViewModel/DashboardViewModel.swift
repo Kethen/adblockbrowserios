@@ -17,24 +17,25 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 typealias DashboardModelChange = BookmarksModelChange
 
 final class DashboardViewModel: ViewModelProtocol, BookmarksBaseViewModel {
     let components: ControllerComponents
-    let isGhostModeEnabled: Variable<Bool>
+    let isGhostModeEnabled: BehaviorRelay<Bool>
     let browserSignalSubject: PublishSubject<BrowserControlSignals>
     let adapter: SimpleFetchedResultsAdapter<BookmarkExtras>?
 
     var model = [BookmarkExtras]()
     let modelChanges = PublishSubject<[DashboardModelChange]>()
 
-    let isReordering = Variable(false)
+    let isReordering = BehaviorRelay<Bool>(value:false)
 
     private let disposeBag = DisposeBag()
 
     init(components: ControllerComponents,
-         isGhostModeEnabled: Variable<Bool>,
+         isGhostModeEnabled: BehaviorRelay<Bool>,
          browserSignalSubject: PublishSubject<BrowserControlSignals>) {
         self.components = components
         self.isGhostModeEnabled = isGhostModeEnabled
@@ -54,14 +55,14 @@ final class DashboardViewModel: ViewModelProtocol, BookmarksBaseViewModel {
                 .subscribe(onNext: { [weak self] changes in
                     self?.process(changes: changes)
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
             isReordering.asObservable()
                 .distinctUntilChanged()
                 .subscribe(onNext: { [weak self] isReordering in
                     self?.process(isReordering: isReordering)
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
         }
     }
 

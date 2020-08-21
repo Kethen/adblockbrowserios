@@ -17,16 +17,17 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 final class EditBookmarkViewModel: ViewModelProtocol {
     let components: ControllerComponents
     let bookmark: BookmarkExtras
-    let isGhostModeEnabled: Variable<Bool>
+    let isGhostModeEnabled: BehaviorRelay<Bool>
     let viewWillBeDismissed: PublishSubject<Void>
 
     init(components: ControllerComponents,
          bookmark: BookmarkExtras,
-         isGhostModeEnabled: Variable<Bool>,
+         isGhostModeEnabled: BehaviorRelay<Bool>,
          viewWillBeDismissed: PublishSubject<Void>) {
         self.components = components
         self.bookmark = bookmark

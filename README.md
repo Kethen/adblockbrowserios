@@ -15,13 +15,14 @@ The directory structure should be configured as such:
     |- adblockbrowserios-core
 ```
 
-- [Xcode 10.3, for now](https://developer.apple.com/xcode/)
+- [Xcode 11.6](https://developer.apple.com/xcode/)
 - [Carthage](https://github.com/Carthage/Carthage)
 - [Sourcery](https://github.com/krzysztofzablocki/Sourcery)
 - [SwiftLint](https://github.com/realm/SwiftLint/) (optional)
 
 ### Building in Xcode
 
-1. Run `carthage update` to install additional Swift dependencies.
-2. Open _AdblockBrowser.xcworkspace_ in Xcode.
-3. Build and run the project locally in Xcode.
+1. Clone adblockbrowserios-core next to this project, follow all preparation instructions there in the project root
+2. Run `carthage update` to install additional Swift dependencies.
+3. Open _AdblockBrowser.xcworkspace_ in Xcode.
+4. Build and run the project locally in Xcode.

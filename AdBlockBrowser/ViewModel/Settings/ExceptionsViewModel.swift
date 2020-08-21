@@ -16,6 +16,7 @@
  */
 
 import RxSwift
+import RxRelay
 
 final class ExceptionsViewModel: ViewModelProtocol {
     enum WhitelistedSitesChanges {
@@ -25,13 +26,13 @@ final class ExceptionsViewModel: ViewModelProtocol {
 
     let components: ControllerComponents
     let extensionFacade: ABPExtensionFacadeProtocol
-    let isAcceptableAdsEnabled: Variable<Bool>
+    let isAcceptableAdsEnabled: BehaviorRelay<Bool>
     let whitelistedSitesChanges: Observable<WhitelistedSitesChanges>
 
     private var subject = PublishSubject<WhitelistedSitesChanges>()
     private(set) var whitelistedSites = [(site: String, isWhitelisted: Bool)]?.none
 
-    init(components: ControllerComponents, isAcceptableAdsEnabled: Variable<Bool>) {
+    init(components: ControllerComponents, isAcceptableAdsEnabled: BehaviorRelay<Bool>) {
         self.components = components
         self.extensionFacade = components.extensionFacade
         self.isAcceptableAdsEnabled = isAcceptableAdsEnabled

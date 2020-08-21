@@ -35,17 +35,17 @@ extension ChromeTab {
 // MARK: - URL loading
 
 extension ChromeTab {
-    func load(url: URL?) {
+ func load(url: URL?) {
         var url = url
 
         if let relativeURL = url, (relativeURL.host?.isEmpty ?? true) {
             let relativeURLString = relativeURL.absoluteString
             if let currentURL = webView.currentRequest?.url {
 
-                // If the new URL is relative to the current URL
-                // (only path, does not contain host)
-                // it must be fully resolved against the current URL.
-                // Otherwise [UIWebView loadRequest] will make 'file:' request from it
+                 // If the new URL is relative to the current URL
+                 // (only path, does not contain host)
+                 // it must be fully resolved against the current URL.
+                 // Otherwise [UIWebView loadRequest] will make 'file:' request from it
 
                 url = Foundation.URL(string: relativeURLString, relativeTo: currentURL)
             } else {
@@ -54,7 +54,7 @@ extension ChromeTab {
         }
 
         webView.stopLoading()
-
+        
         if let url = url {
             webView.loadRequest(URLRequest(url: url))
         } else if let url = Foundation.URL(string: "about:blank") {

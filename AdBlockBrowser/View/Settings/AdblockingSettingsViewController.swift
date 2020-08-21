@@ -108,7 +108,7 @@ final class AdblockingSettingsViewController: SettingsTableViewController<Adbloc
             .drive(onNext: { [weak self] _ in
                 self?.tableView?.reloadSections(IndexSet(integer: 0), with: .none)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
     }
 
     // MARK: - SwitchCellDelegate

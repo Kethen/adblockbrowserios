@@ -17,22 +17,23 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 final class BookmarksViewModel: ViewModelProtocol, BookmarksBaseViewModel {
     let components: ControllerComponents
-    let isGhostModeEnabled: Variable<Bool>
+    let isGhostModeEnabled: BehaviorRelay<Bool>
     let browserSignalSubject: PublishSubject<BrowserControlSignals>
     let adapter: SimpleFetchedResultsAdapter<BookmarkExtras>?
 
     var model = [BookmarkExtras]()
     let modelChanges = PublishSubject<[BookmarksModelChange]>()
 
-    let isEditing = Variable(false)
+    let isEditing = BehaviorRelay(value: false)
 
     private let disposeBag = DisposeBag()
 
     init(components: ControllerComponents,
-         isGhostModeEnabled: Variable<Bool>,
+         isGhostModeEnabled: BehaviorRelay<Bool>,
          browserSignalSubject: PublishSubject<BrowserControlSignals>) {
         self.components = components
         self.isGhostModeEnabled = isGhostModeEnabled
@@ -52,14 +53,14 @@ final class BookmarksViewModel: ViewModelProtocol, BookmarksBaseViewModel {
                 .subscribe(onNext: { [weak self] changes in
                     self?.process(changes: changes)
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
 
             isEditing.asObservable()
                 .distinctUntilChanged()
                 .subscribe(onNext: { [weak self] isEditing in
                     self?.process(isEditing: isEditing)
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
         }
     }
 
@@ -93,7 +94,7 @@ final class BookmarksViewModel: ViewModelProtocol, BookmarksBaseViewModel {
     }
 
     func enterEditMode() {
-        isEditing.value = true
+        isEditing.accept(true)
     }
 
     func leaveEditMode() {
@@ -107,7 +108,7 @@ final class BookmarksViewModel: ViewModelProtocol, BookmarksBaseViewModel {
         // Commit changes in ordering before leaving edit mode
         components.browserStateData.saveContextWithErrorAlert()
 
-        isEditing.value = false
+        isEditing.accept(false)
     }
 
     // MARK: - Private

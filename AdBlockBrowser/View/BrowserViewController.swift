@@ -93,7 +93,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
             .drive(onNext: { [weak self] tab in
                 self?.update(activeTab: tab)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.url.asDriver()
             .drive(onNext: { [weak self] current in
@@ -101,7 +101,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
                 self?.bookmarkButton?.isHidden = current == nil
                 self?.reloadButton?.isHidden = current == nil
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.isMenuViewShown.asDriver()
             .drive(onNext: { [weak self] isShown in
@@ -117,14 +117,14 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
 
                 self?.tapGestureRecognizer?.isEnabled = isShown
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.isBookmarked.asDriver()
             .drive(onNext: { [weak self] isBookmarked in
                 let image = isBookmarked ? #imageLiteral(resourceName: "FaviconActive") : #imageLiteral(resourceName: "FaviconInactive")
                 self?.bookmarkButton?.setImage(image, for: .normal)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.isShareDialogPresented.asDriver()
             .scan((false, false), accumulator: { ($1, $0.0) })
@@ -137,16 +137,16 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
                                                     title: webView.documentTitle,
                                                     anchorView: self?.menuControlButton,
                                                     webView: webView) { _ in
-                                                        self?.viewModel?.isShareDialogPresented.value = false
+                                                        self?.viewModel?.isShareDialogPresented.accept(false)
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.progress.asDriver()
             .drive(onNext: { [weak self] progress in
                 self?.update(progress: progress)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.isTabsViewShown.asDriver()
             .distinctUntilChanged()
@@ -160,7 +160,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
                     self?.webView?.updatePreview()
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.signalSubject
             .subscribe(onNext: { [weak self] signal in
@@ -184,20 +184,20 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
                     }
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         searchPhrase
             .subscribe(onNext: { [weak self] searchPhrase in
                 self?.viewForWebViewGestureRecognizer?.isEnabled = searchPhrase != nil
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.toolbarProgress.asObservable()
             .subscribe(onNext: { [weak self] progress in
                 self?.topConstraint?.constant = -44 * progress
                 self?.bottomConstraint?.constant = -44 * progress
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         isGhostModeEnabled
             .subscribe(onNext: { [weak self] isEnabled in
@@ -212,13 +212,13 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
                     self?.bottomRuler?.backgroundColor = isEnabled ? .abbCharcoalGray : #colorLiteral(red: 0.8235294118, green: 0.8274509804, blue: 0.8352941176, alpha: 1)
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         isAddressBarEdited
             .filter { $0 }
             .map { _ in String?.none }
             .bind(to: viewModel.searchPhrase)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         let isDashboardShown = Observable
             .combineLatest(viewModel.url.asObservable(), isAddressBarEdited) {
@@ -232,7 +232,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
                     containerView?.alpha = isShown ? 1.0 : 0.0
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         Observable
             .combineLatest(isGhostModeEnabled, isAddressBarEdited, viewModel.tabsCount) {
@@ -241,7 +241,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
             .subscribe(onNext: { [weak self] state in
                 self?.updateGhostModeBanner(with: state)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         let url = viewModel.url.asObservable()
         let addressTrustState = viewModel.addressTrustState
@@ -258,7 +258,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
 
                 self?.scrollViewController.scrollsToTop = !state.0
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         scrollViewController.delegate = self
         addressField?.historyManager = viewModel.historyManager
@@ -268,7 +268,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
             .filter { $0.state == .ended || $0.state == .began }
             .map { _ in false }
             .bind(to: viewModel.isTabsViewShown)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         tapGestureRecognizer?.rx.event
             .filter { [weak self] recognizer in
@@ -285,7 +285,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
             }
             .map { _ in false }
             .bind(to: viewModel.isMenuViewShown)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
     }
 
     private var ghostModeBanner: UIView?
@@ -465,14 +465,14 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
                     case .search(let result):
                         addressField.text = result
                     case .findInPage(let phrase):
-                        self?.viewModel?.searchPhrase.value = phrase
+                        self?.viewModel?.searchPhrase.accept(phrase)
                     }
                     _ = self?.textFieldShouldReturn(addressField)
                 }
             }
         case let bookmarksViewController as BookmarksViewController:
             if let viewModel = viewModel {
-                viewModel.isBookmarksViewShown.value = true
+                viewModel.isBookmarksViewShown.accept(true)
                 bookmarksViewController.viewModel = BookmarksViewModel(components: viewModel.components,
                                                                        isGhostModeEnabled: viewModel.isGhostModeEnabled,
                                                                        browserSignalSubject: viewModel.signalSubject)
@@ -485,7 +485,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
             }
         case let editBookmarkViewController as EditBookmarkViewController:
             if let viewModel = viewModel, let bookmark = sender as? BookmarkExtras {
-                viewModel.isBookmarksViewShown.value = true
+                viewModel.isBookmarksViewShown.accept(true)
                 editBookmarkViewController.viewModel = EditBookmarkViewModel(components: viewModel.components,
                                                                              bookmark: bookmark,
                                                                              isGhostModeEnabled: viewModel.isGhostModeEnabled,
@@ -508,12 +508,12 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        viewModel?.isBrowserNavigationEnabled.value = true
+        viewModel?.isBrowserNavigationEnabled.accept(true)
         super.viewWillAppear(animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        viewModel?.isBrowserNavigationEnabled.value = false
+        viewModel?.isBrowserNavigationEnabled.accept(false)
         super.viewWillDisappear(animated)
     }
 
@@ -645,7 +645,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
     }
 
     fileprivate func enterEditingMode() {
-        viewModel?.isAddressBarEdited.value = true
+        viewModel?.isAddressBarEdited.accept(true)
         view.layoutIfNeeded()
 
         UIView.animate(withDuration: addressBarAnimationDuration, delay: 0.0, options: [], animations: { () in
@@ -667,7 +667,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
     }
 
     fileprivate func leaveEditingMode() {
-        viewModel?.isAddressBarEdited.value = false
+        viewModel?.isAddressBarEdited.accept(false)
         view.layoutIfNeeded()
 
         UIView.animate(withDuration: addressBarAnimationDuration, delay: 0.0, options: [], animations: { () in
@@ -724,7 +724,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
             })
         } else {
             webView?.reload()
-            viewModel?.progress.value = 0.0
+            viewModel?.progress.accept(0.0)
         }
     }
 
@@ -747,7 +747,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
     }
 
     @IBAction func onViewForWebViewTabRecognized(_ sender: UITapGestureRecognizer) {
-        viewModel?.searchPhrase.value = nil
+        viewModel?.searchPhrase.accept(nil)
     }
 
     // MARK: - UIGestureTabRecognizer
@@ -802,7 +802,19 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
             initializeWebView(aWebView, forceRelayout: true)
         }
     }
-
+    
+    /*
+    private func verifyAndUpdateWebView(){
+        if let tab = viewModel?.activeTab.value {
+            if webView != tab.webView{
+                setWebView(tab.webView)
+                prepareWebView(tab.webView)
+                initializeWebView(tab.webView, forceRelayout:true)
+            }
+        }
+    }
+    */
+    
     func load(_ url: URL?) {
         onCancelActivated(nil)
 
@@ -1151,7 +1163,7 @@ final class BrowserViewController: ViewController<BrowserViewModel>,
             return
         }
 
-        viewModel?.toolbarProgress.value = progress
+        viewModel?.toolbarProgress.accept(progress)
     }
 
     fileprivate func openToolbars() {

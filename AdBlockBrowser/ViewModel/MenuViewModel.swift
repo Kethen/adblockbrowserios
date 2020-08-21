@@ -17,25 +17,30 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 enum MenuItem: Int {
     case adblockingEnabled
     case openNewTab
+    case requestDesktopSite
     case addBookmark
     case share
     case history
     case settings
 }
 
+let DesktopUserAgent = "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0"
+let MobileUserAgent = "Mozilla/5.0 (Android 10; Mobile; rv:68.0) Gecko/68.0 Firefox/79.0"
+
 final class MenuViewModel: ViewModelProtocol {
     let components: ControllerComponents
     let extensionFacade: ABPExtensionFacadeProtocol
     var viewModel: BrowserViewModel
-    let isBookmarked: Variable<Bool>
-    let isHistoryViewShown: Variable<Bool>
-    let isExtensionEnabled = Variable(false)
-    let isPageWhitelisted = Variable(false)
-    let isWhitelistable = Variable(false)
+    let isBookmarked: BehaviorRelay<Bool>
+    let isHistoryViewShown: BehaviorRelay<Bool>
+    let isExtensionEnabled = BehaviorRelay(value: false)
+    let isPageWhitelisted = BehaviorRelay(value: false)
+    let isWhitelistable = BehaviorRelay(value: false)
 
     private let disposeBag = DisposeBag()
 
@@ -51,7 +56,7 @@ final class MenuViewModel: ViewModelProtocol {
             .map({ $0 ?? false })
             .distinctUntilChanged()
             .bind(to: isExtensionEnabled)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         let url = viewModel.url.asObservable()
 
@@ -59,7 +64,7 @@ final class MenuViewModel: ViewModelProtocol {
             return enabled && url != nil
         }
             .bind(to: isWhitelistable)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         Observable.combineLatest(isExtensionEnabled.asObservable(), url) {
             (enabled: $0, url: $1)
@@ -67,20 +72,20 @@ final class MenuViewModel: ViewModelProtocol {
             .subscribe(onNext: { [weak self] combinedLatest in
                 if combinedLatest.enabled, let url = combinedLatest.url {
                     self?.extensionFacade.isSiteWhitelisted(url.absoluteString) { boolValue, _ in
-                        self?.isPageWhitelisted.value = boolValue
+                        self?.isPageWhitelisted.accept(boolValue)
                     }
                 } else {
-                    self?.isPageWhitelisted.value = false
+                    self?.isPageWhitelisted.accept(false)
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
     }
 
     // MARK: -
 
     func shouldBeEnabled(_ menuItem: MenuItem) -> Bool {
         switch menuItem {
-        case .adblockingEnabled, .addBookmark, .share:
+        case .adblockingEnabled, .addBookmark, .share, .requestDesktopSite:
             return isWhitelistable.value
         default:
             return true
@@ -93,7 +98,7 @@ final class MenuViewModel: ViewModelProtocol {
             if let url = viewModel.currentURL.value?.absoluteString {
                 let whitelisted = isPageWhitelisted.value
                 extensionFacade.whitelistSite(url, whitelisted: !whitelisted) { [weak self] error in
-                    self?.isPageWhitelisted.value = !whitelisted == (error == nil)
+                    self?.isPageWhitelisted.accept(!whitelisted == (error == nil))
                 }
             }
             return
@@ -109,13 +114,23 @@ final class MenuViewModel: ViewModelProtocol {
                 viewModel.addBookmark()
             }
         case .share:
-            viewModel.isShareDialogPresented.value = true
+            viewModel.isShareDialogPresented.accept(true)
         case .history:
-            isHistoryViewShown.value = true
+            isHistoryViewShown.accept(true)
+        case .requestDesktopSite:
+            if let tab = viewModel.activeTab.value{
+                tab.desktop = !tab.desktop
+                tab.murderWebView()
+                viewModel.activeTab.accept(tab)
+                if let url = tab.URL {
+                    tab.load(url:url as URL)
+                }
+            }
+            break
         default:
             break
         }
 
-        viewModel.isMenuViewShown.value = false
+        viewModel.isMenuViewShown.accept(false)
     }
 }

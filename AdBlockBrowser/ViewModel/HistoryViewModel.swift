@@ -17,6 +17,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 final class HistoryViewModel: ViewModelProtocol {
     typealias HistoryModelChanges = (
@@ -29,7 +30,7 @@ final class HistoryViewModel: ViewModelProtocol {
 
     let components: ControllerComponents
     let historyManager: BrowserHistoryManager
-    let isHistoryViewShown: Variable<Bool>
+    let isHistoryViewShown: BehaviorRelay<Bool>
     let adapter: FetchedResultsAdapter<HistoryUrl>?
 
     let changes = PublishSubject<HistoryModelChanges>()
@@ -65,7 +66,7 @@ final class HistoryViewModel: ViewModelProtocol {
                     )
                 }
                 .bind(to: changes)
-                .addDisposableTo(disposeBag)
+                .disposed(by:disposeBag)
         }
     }
 

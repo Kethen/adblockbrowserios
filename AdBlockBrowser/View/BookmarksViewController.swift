@@ -57,7 +57,7 @@ final class BookmarksViewController: ViewController<BookmarksViewModel>,
                 self?.navigationBar?.clipsToBounds = isGhostModeEnabled
                 self?.tableView?.separatorColor = isGhostModeEnabled ? .abbCharcoalGray : .abbLightGray
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.isEditing.asDriver()
             .drive(onNext: { [weak self] isEditing in
@@ -69,13 +69,13 @@ final class BookmarksViewController: ViewController<BookmarksViewModel>,
                     })
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         editButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] () in
                 self?.viewModel?.enterEditMode()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         doneButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] () in

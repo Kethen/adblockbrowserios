@@ -17,6 +17,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 enum TabsEntry {
     case addNewTab
@@ -26,19 +27,19 @@ enum TabsEntry {
 
 final class TabsViewModel: ViewModelProtocol {
     let components: ControllerComponents
-    let currentTabsModel: Variable<TabsModel>
+    let currentTabsModel: BehaviorRelay<TabsModel>
     let tabsEvents: Observable<TabsModelChangeEvent>
-    let isGhostModeEnabled: Variable<Bool>
-    let isShown: Variable<Bool>
-    let isUndoToastShown = Variable(false)
+    let isGhostModeEnabled: BehaviorRelay<Bool>
+    let isShown: BehaviorRelay<Bool>
+    let isUndoToastShown = BehaviorRelay(value:	false)
 
     private let disposeBag = DisposeBag()
 
     // swiftlint:disable:next function_body_length
     init(components: ControllerComponents,
-         currentTabsModel: Variable<TabsModel>,
-         isGhostModeEnabled: Variable<Bool>,
-         isShown: Variable<Bool>) {
+         currentTabsModel: BehaviorRelay<TabsModel>,
+         isGhostModeEnabled: BehaviorRelay<Bool>,
+         isShown: BehaviorRelay<Bool>) {
         self.components = components
         self.isGhostModeEnabled = isGhostModeEnabled
         self.isShown = isShown
@@ -74,7 +75,7 @@ final class TabsViewModel: ViewModelProtocol {
             .flatMapLatest { isHidden -> Observable<Int> in
                 if isHidden {
                     // Show toast
-                    let hideAndRemove = Observable.just(1).delay(5.0, scheduler: MainScheduler.instance)
+                    let hideAndRemove = Observable.just(1).delay(DispatchTimeInterval.seconds(5), scheduler: MainScheduler.instance)
                     return Observable.just(0).concat(hideAndRemove)
                 } else {
                     // Hide toast
@@ -91,14 +92,14 @@ final class TabsViewModel: ViewModelProtocol {
                     self?.showHiddenTabs()
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         observable
             .map { $0 == 0 }
-            .throttle(0.5, scheduler: MainScheduler.instance)
+            .throttle(DispatchTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(to: isUndoToastShown)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         isShown.asDriver()
             .drive(onNext: { [weak self] isShown in
@@ -106,21 +107,21 @@ final class TabsViewModel: ViewModelProtocol {
                     self?.removeHiddenTabs()
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         // Update active tab
         hiddenTabsObservable
             .subscribe(onNext: { [weak self] _ in
                 self?.updateActiveTab()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
     }
 
     func showNewTab() {
         if let tab = currentTabsModel.value.window.add(tabWithURL: nil, atIndex: 0) {
             tab.active = true
             tab.window.focused = true
-            isShown.value = false
+            isShown.accept(false)
         }
     }
 
@@ -128,7 +129,7 @@ final class TabsViewModel: ViewModelProtocol {
         // Select tab, update active status, use it as main webView and close popup.
         tab.active = true
         tab.window.focused = true
-        isShown.value = false
+        isShown.accept(false)
     }
 
     func hide(tab: ChromeTab) {

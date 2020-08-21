@@ -38,16 +38,15 @@ final class LumberjackLogger: LoggerSink {
 
 
     private init() {
-        defaultDebugLevel = .warning
+        dynamicLogLevel = .warning
 
         if let ttyLogger = DDTTYLogger.sharedInstance {
             ttyLogger.logFormatter = LumberjackFormatter()
             DDLog.add(ttyLogger)
         }
-        if let aslLogger = DDASLLogger.sharedInstance {
-            aslLogger.logFormatter = LumberjackFormatter()
-            DDLog.add(aslLogger)
-        }
+        let oslogger = DDOSLogger.sharedInstance
+        oslogger.logFormatter = LumberjackFormatter()
+        DDLog.add(oslogger)
     }
 
     static func debug(_ message: String) {

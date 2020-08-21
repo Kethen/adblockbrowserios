@@ -18,6 +18,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import RxRelay
 
 enum AddressTrustState: Equatable {
     case none
@@ -50,30 +51,30 @@ final class BrowserViewModel: ViewModelProtocol {
     let browserStateData: BrowserStateCoreData
     let historyManager: BrowserHistoryManager
     let autocompleteDataSource: OmniboxDataSource
-    let currentTabsModel: Variable<TabsModel>
+    let currentTabsModel: BehaviorRelay<TabsModel>
     let signalSubject: PublishSubject<BrowserControlSignals>
-    let isGhostModeEnabled: Variable<Bool>
-    let isBrowserNavigationEnabled: Variable<Bool>
-    let isTabsViewShown: Variable<Bool>
-    let isBookmarksViewShown: Variable<Bool>
-    let isHistoryViewShown: Variable<Bool>
-    let searchPhrase: Variable<String?>
-    let toolbarProgress: Variable<CGFloat>
+    let isGhostModeEnabled: BehaviorRelay<Bool>
+    let isBrowserNavigationEnabled: BehaviorRelay<Bool>
+    let isTabsViewShown: BehaviorRelay<Bool>
+    let isBookmarksViewShown: BehaviorRelay<Bool>
+    let isHistoryViewShown: BehaviorRelay<Bool>
+    let searchPhrase: BehaviorRelay<String?>
+    let toolbarProgress: BehaviorRelay<CGFloat>
     let tabsCount: Observable<Int>
 
     // Owned properties
-    let activeTab = Variable(ChromeTab?.none)
-    let addressTrustState = Variable(AddressTrustState.none)
-    let currentURL = Variable(URL?.none)
-    let progress = Variable(Double(0))
-    let url = Variable(URL?.none)
+    let activeTab = BehaviorRelay(value:ChromeTab?.none)
+    let addressTrustState = BehaviorRelay(value: AddressTrustState.none)
+    let currentURL = BehaviorRelay(value: URL?.none)
+    let progress = BehaviorRelay(value :Double(0))
+    let url = BehaviorRelay(value: URL?.none)
     let bookmarksViewWillBeDismissed = PublishSubject<Void>()
 
     // UI Variables
-    let isMenuViewShown = Variable(false)
-    let isBookmarked = Variable(false)
-    let isShareDialogPresented = Variable(false)
-    let isAddressBarEdited = Variable(false)
+    let isMenuViewShown = BehaviorRelay(value: false)
+    let isBookmarked = BehaviorRelay(value: false)
+    let isShareDialogPresented = BehaviorRelay(value: false)
+    let isAddressBarEdited = BehaviorRelay(value: false)
 
     private let disposeBag = DisposeBag()
 
@@ -102,7 +103,7 @@ final class BrowserViewModel: ViewModelProtocol {
             .observe(ChromeTab.self, #keyPath(Chrome.focusedWindow.activeTab))
             .distinctUntilChanged(==)
             .bind(to: activeTab)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
         components.chrome.rx
             .observe(AuthenticationResultProtocol.self, #keyPath(Chrome.focusedWindow.activeTab.authenticationResult))
             .map { result in
@@ -122,19 +123,19 @@ final class BrowserViewModel: ViewModelProtocol {
                 }
             }
             .bind(to: addressTrustState)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
         components.chrome.rx
             .observe(NSURL.self, #keyPath(Chrome.focusedWindow.activeTab.URL))
             .map({ $0 as URL? })
             .distinctUntilChanged(==)
             .bind(to: currentURL)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
         components.chrome.rx
             .observe(Double.self, #keyPath(Chrome.focusedWindow.activeTab.progress))
             .map({ $0 ?? 0.0 })
             .distinctUntilChanged(==)
             .bind(to: progress)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         currentURL.asObservable()
             .map({ url -> URL? in
@@ -146,7 +147,7 @@ final class BrowserViewModel: ViewModelProtocol {
             })
             .distinctUntilChanged(==)
             .bind(to: url)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         let isAnyBookmarkChanged = NotificationCenter.default.rx
             .notification(.NSManagedObjectContextDidSave)
@@ -173,24 +174,24 @@ final class BrowserViewModel: ViewModelProtocol {
             })
             .distinctUntilChanged()
             .bind(to: isBookmarked)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         bookmarksViewWillBeDismissed
             .map { _ in false }
             .bind(to: isBookmarksViewShown)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.events.asObserver()
             .map { _ in false }
             .bind(to: isMenuViewShown)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
     }
 
     // MARK: -
 
     func didBecomeRootView() {
         if isHistoryViewShown.value {
-            isHistoryViewShown.value = false
+            isHistoryViewShown.accept(false)
         }
     }
 
@@ -245,6 +246,6 @@ final class BrowserViewModel: ViewModelProtocol {
     }
 
     func toggleMenu() {
-        isMenuViewShown.value = !isMenuViewShown.value
+        isMenuViewShown.accept(!isMenuViewShown.value)
     }
 }

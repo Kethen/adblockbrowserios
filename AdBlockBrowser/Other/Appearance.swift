@@ -20,6 +20,7 @@ import Foundation
 import UIKit
 
 let animationDuration = TimeInterval(0.35)
+let animationDurationDispatch = DispatchTimeInterval.milliseconds(350)
 let defaultTransitionDuration = TimeInterval(0.35)
 
 public func attributedStringFromMarkdown(_ string: String, attributes: [AnyHashable: Any]) -> NSAttributedString? {
