@@ -52,7 +52,7 @@ class BrowserAssembly {
             throw BootstrapError.assemblyCoreDataSetup
         }
         // Create default bookmarks, or do nothing if thery already exist
-        createDefaultBookmarks(browserStateData, storeCreated: storeCreated.boolValue)
+        // createDefaultBookmarks(browserStateData, storeCreated: storeCreated.boolValue)
 
         let historyManager = BrowserHistoryManager(coreData: browserStateData)
         let bridgeSwitchboard = BridgeSwitchboard()
