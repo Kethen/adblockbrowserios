@@ -22,6 +22,25 @@ import UIKit
 // Extracted from the embedded extension.
 // File: firstRun.js
 public let blockingItems = [
+    /*
+    "uBlock":(
+        title: "",
+        subscription: ListedSubscription(
+            url:"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
+            title: "uBlock",
+            homepage: "https://github.com/gorhill/uBlock"
+        )
+    ),
+    "uBlock":(
+        title: "",
+        subscription: ListedSubscription(
+            url:"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
+            title: "uBlock",
+            homepage: "https://github.com/gorhill/uBlock"
+        )
+    ),
+    */
+    
     "TrackingCell": (
         title: localize("Disable Tracking", comment: "Ad blocking Settings - Disable tracking"),
         subscription: ListedSubscription(
@@ -50,12 +69,18 @@ public let blockingItems = [
             title: "Adblock Warning Removal List",
             homepage: "https://easylist.adblockplus.org/")
     )
+    
 ]
+
+public let blockingItemsKeys = Array(blockingItems.keys).sorted(by: {(a:String, b:String) -> Bool in
+    return a > b
+    })
 
 final class AdblockingSettingsViewController: SettingsTableViewController<AdblockingSettingsViewModel>, SwitchCellDelegate {
     @IBOutlet weak var adblockingLabel: UILabel?
     @IBOutlet weak var exceptionsLabel: UILabel?
     @IBOutlet weak var languagesLabel: UILabel?
+    @IBOutlet weak var mainTable : UITableView?
 
     let items = blockingItems
 
@@ -65,6 +90,18 @@ final class AdblockingSettingsViewController: SettingsTableViewController<Adbloc
         adblockingLabel?.text = localize("Ad blocking", comment: "Ad blocking Settings - cell title")
         exceptionsLabel?.text = localize("Exceptions", comment: "Ad blocking Settings - show more blocking options")
         languagesLabel?.text = localize("Languages", comment: "Ad blocking Settings - enable/disable acceptable ads")
+        /*
+        if let mainTable = mainTable {
+            for item in items {
+                let newCell = UITableViewCell(style:UITableViewCell.CellStyle.default, reuseIdentifier: item.key + "_test")
+                if let label = newCell.textLabel{
+                    label.font = UIFont(name: "system", size: 14)
+                    label.text = item.value.title
+                    mainTable.addSubview(newCell)
+                }
+            }
+        }
+        */
     }
 
     
@@ -112,7 +149,8 @@ final class AdblockingSettingsViewController: SettingsTableViewController<Adbloc
     }
 
     // MARK: - SwitchCellDelegate
-
+    
+    
     func switchValueDidChange(_ cell: SwitchCell) {
         if cell.reuseIdentifier == "AdBlockingCell" {
             viewModel?.extensionEnabled = cell.isOn
@@ -135,40 +173,59 @@ final class AdblockingSettingsViewController: SettingsTableViewController<Adbloc
         }
     }
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // print("asking for number of rows in section %d", section)
+        if section == 0{
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }else{
+            return blockingItemsKeys.count + 1
+        }
+    }
+    
     // MARK: - UITableViewDataSource
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        cell.textLabel?.numberOfLines = 2
-        if #available(iOS 9.0, *) {
-            tableView.cellLayoutMarginsFollowReadableWidth = false
-        }
-
+        let cell:UITableViewCell
         let isEnabled = viewModel?.extensionEnabled ?? false
+        if indexPath.section == 0 || (indexPath.section == 1 && indexPath.row == 0) {
+            cell = super.tableView(tableView, cellForRowAt: indexPath)
 
-        if cell.reuseIdentifier == "AdBlockingCell", let cell = cell as? SwitchCell {
-            cell.isOn = isEnabled
-            cell.delegate = self
-            return cell
-        }
+            if #available(iOS 9.0, *) {
+                tableView.cellLayoutMarginsFollowReadableWidth = false
+            }
 
-        (cell as? SwitchCell)?.isEnabled = isEnabled
-        cell.isUserInteractionEnabled = isEnabled
-        cell.selectionStyle = isEnabled ? .default : .none
-        cell.textLabel?.isEnabled = isEnabled
+            if cell.reuseIdentifier == "AdBlockingCell", let cell = cell as? SwitchCell {
+                cell.isOn = isEnabled
+                cell.delegate = self
+                return cell
+            }
 
-        if cell.reuseIdentifier == "ExceptionsCell" {
-            let allow = localize("Yes", comment: "Allow Google search")
-            let deny = localize("No", comment: "Deny Google search")
-            cell.detailTextLabel?.text = viewModel?.isAcceptableAdsEnabled.value ?? false ? allow : deny
-        } else {
-            cell.detailTextLabel?.text = nil
-        }
+            (cell as? SwitchCell)?.isEnabled = isEnabled
 
-        if let identifier = cell.reuseIdentifier, let item = items[identifier] {
+
+            if cell.reuseIdentifier == "ExceptionsCell" {
+                let allow = localize("Yes", comment: "Allow Google search")
+                let deny = localize("No", comment: "Deny Google search")
+                cell.detailTextLabel?.text = viewModel?.isAcceptableAdsEnabled.value ?? false ? allow : deny
+            } else {
+                cell.detailTextLabel?.text = nil
+            }
+        }else{
+            let index = indexPath.row - 1
+            let key = blockingItemsKeys[index]
+            let item = items[key]!
+            cell = SwitchCell(style:UITableViewCell.CellStyle.default, reuseIdentifier: key)
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
             cell.textLabel?.text = item.title
-            if let cell = cell as? SwitchCell {
+            cell.contentView.contentMode = UIView.ContentMode.center
+            cell.indentationWidth = 10
+            if let cell = cell as? SwitchCell{
                 if let status = viewModel?.subscriptionsStatus[item.subscription] {
+                    cell.awakeFromNib()
                     cell.type = .switch
                     cell.isOn = status == .enabled
                     cell.delegate = self
@@ -177,10 +234,32 @@ final class AdblockingSettingsViewController: SettingsTableViewController<Adbloc
                 }
             }
         }
-
+        cell.textLabel?.numberOfLines = 2
+        if let cell = cell as? SwitchCell {
+            cell.selectionStyle = .none
+        }else{
+            cell.selectionStyle = isEnabled ? .default : .none
+        }
+        cell.isUserInteractionEnabled = isEnabled
+        cell.textLabel?.isEnabled = isEnabled
         return cell
     }
+    override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+        if indexPath.section == 0 {
+            return super.tableView(tableView, indentationLevelForRowAt: indexPath)
+        }else{
+            return 0
+        }
+    }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0{
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }else{
+            return 44
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return nil
     }
