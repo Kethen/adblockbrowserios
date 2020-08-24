@@ -53,20 +53,20 @@ final class MenuViewController: TableViewController<MenuViewModel> {
             .drive(onNext: { [weak self] _ in
                 self?.reload()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.isPageWhitelisted.asDriver()
             .drive(onNext: { [weak self] whitelisted in
                 self?.whitelistSwitch?.setOn(!whitelisted, animated: true)
                 self?.reload()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.isBookmarked.asDriver()
             .drive(onNext: { [weak self] _ in
                 self?.reload()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         viewModel.isHistoryViewShown.asObservable()
             .distinctUntilChanged()
@@ -77,7 +77,7 @@ final class MenuViewController: TableViewController<MenuViewModel> {
                     self?.navigationController?.popViewController(animated: true)
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
     }
 
     // MARK: -

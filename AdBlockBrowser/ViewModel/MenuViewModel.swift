@@ -17,6 +17,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 enum MenuItem: Int {
     case adblockingEnabled
@@ -32,11 +33,11 @@ final class MenuViewModel: ViewModelProtocol {
     let components: ControllerComponents
     let extensionFacade: ABPExtensionFacadeProtocol
     var viewModel: BrowserViewModel
-    let isBookmarked: Variable<Bool>
-    let isHistoryViewShown: Variable<Bool>
-    let isExtensionEnabled = Variable(false)
-    let isPageWhitelisted = Variable(false)
-    let isWhitelistable = Variable(false)
+    let isBookmarked: BehaviorRelay<Bool>
+    let isHistoryViewShown: BehaviorRelay<Bool>
+    let isExtensionEnabled = BehaviorRelay(value:false)
+    let isPageWhitelisted = BehaviorRelay(value:false)
+    let isWhitelistable = BehaviorRelay(value:false)
 
     private let disposeBag = DisposeBag()
 
@@ -52,7 +53,7 @@ final class MenuViewModel: ViewModelProtocol {
             .map({ $0 ?? false })
             .distinctUntilChanged()
             .bind(to: isExtensionEnabled)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         let url = viewModel.url.asObservable()
 
@@ -60,7 +61,7 @@ final class MenuViewModel: ViewModelProtocol {
             return enabled && url != nil
         }
             .bind(to: isWhitelistable)
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
 
         Observable.combineLatest(isExtensionEnabled.asObservable(), url) {
             (enabled: $0, url: $1)
@@ -68,13 +69,13 @@ final class MenuViewModel: ViewModelProtocol {
             .subscribe(onNext: { [weak self] combinedLatest in
                 if combinedLatest.enabled, let url = combinedLatest.url {
                     self?.extensionFacade.isSiteWhitelisted(url.absoluteString) { boolValue, _ in
-                        self?.isPageWhitelisted.value = boolValue
+                        self?.isPageWhitelisted.accept(boolValue)
                     }
                 } else {
-                    self?.isPageWhitelisted.value = false
+                    self?.isPageWhitelisted.accept(false)
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by:disposeBag)
     }
 
     // MARK: -
@@ -94,7 +95,7 @@ final class MenuViewModel: ViewModelProtocol {
             if let url = viewModel.currentURL.value?.absoluteString {
                 let whitelisted = isPageWhitelisted.value
                 extensionFacade.whitelistSite(url, whitelisted: !whitelisted) { [weak self] error in
-                    self?.isPageWhitelisted.value = !whitelisted == (error == nil)
+                    self?.isPageWhitelisted.accept(!whitelisted == (error == nil))
                 }
             }
             return
@@ -103,7 +104,7 @@ final class MenuViewModel: ViewModelProtocol {
             // re-mount chrome tab onto browser view model
             viewModel.activeTab.value?.active = false
             viewModel.activeTab.value?.active = true
-            viewModel.activeTab.value = viewModel.activeTab.value
+            viewModel.activeTab.accept(viewModel.activeTab.value)
         case .openNewTab:
             if let tab = components.chrome.focusedWindow?.add(tabWithURL: nil, atIndex: 0) {
                 tab.active = true
@@ -116,14 +117,14 @@ final class MenuViewModel: ViewModelProtocol {
                 viewModel.addBookmark()
             }
         case .share:
-            viewModel.isShareDialogPresented.value = true
+            viewModel.isShareDialogPresented.accept(true)
         case .history:
-            isHistoryViewShown.value = true
+            isHistoryViewShown.accept(true)
         default:
             break
         }
 
-        viewModel.isMenuViewShown.value = false
+        viewModel.isMenuViewShown.accept(false)
     }
     
     func isRequestDesktopSiteActive() -> Bool {
