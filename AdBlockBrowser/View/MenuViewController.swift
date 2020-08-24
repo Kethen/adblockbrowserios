@@ -52,20 +52,20 @@ final class MenuViewController: TableViewController<MenuViewModel> {
             .drive(onNext: { [weak self] _ in
                 self?.reload()
             })
-            .disposed(by:disposeBag)
+            .addDisposableTo(disposeBag)
 
         viewModel.isPageWhitelisted.asDriver()
             .drive(onNext: { [weak self] whitelisted in
                 self?.whitelistSwitch?.setOn(!whitelisted, animated: true)
                 self?.reload()
             })
-            .disposed(by:disposeBag)
+            .addDisposableTo(disposeBag)
 
         viewModel.isBookmarked.asDriver()
             .drive(onNext: { [weak self] _ in
                 self?.reload()
             })
-            .disposed(by:disposeBag)
+            .addDisposableTo(disposeBag)
 
         viewModel.isHistoryViewShown.asObservable()
             .distinctUntilChanged()
@@ -76,7 +76,7 @@ final class MenuViewController: TableViewController<MenuViewModel> {
                     self?.navigationController?.popViewController(animated: true)
                 }
             })
-            .disposed(by:disposeBag)
+            .addDisposableTo(disposeBag)
     }
 
     // MARK: -
@@ -123,17 +123,6 @@ final class MenuViewController: TableViewController<MenuViewModel> {
         case .openNewTab:
             text = NSLocalizedString("Open New Tab", comment: "Pull up menu option")
             image = #imageLiteral(resourceName: "newTabIcon")
-        case .requestDesktopSite:
-            if let viewModel = viewModel, let tab = viewModel.viewModel.activeTab.value{
-                if tab.desktop{
-                    text = NSLocalizedString("Request Mobile Site", comment: "Pull up menu option")
-                }else{
-                    text = NSLocalizedString("Request Desktop Site", comment: "Pull up menu option")
-                }
-            }else{
-                text = NSLocalizedString("Request Desktop Site", comment: "Pull up menu option")
-            }
-            image = #imageLiteral(resourceName: "refreshIcon")
         case .addBookmark:
             let isBookmarked = viewModel?.isBookmarked.value ?? false
             if isBookmarked && isEnabled {
@@ -171,9 +160,6 @@ final class MenuViewController: TableViewController<MenuViewModel> {
         if let item = MenuItem(rawValue: indexPath.row) {
             viewModel?.handle(menuItem: item)
             tableView.deselectRow(at: indexPath, animated: true)
-            if item == .requestDesktopSite {
-                tableView.reloadData()
-            }
             if item == .adblockingEnabled {
                 whitelistSwitch?.isOn = !(whitelistSwitch?.isOn ?? true)
             }
